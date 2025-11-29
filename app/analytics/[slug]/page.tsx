@@ -2,12 +2,21 @@ import { supabase } from '@/lib/supabase'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { ArrowLeft, Eye, Clock, Globe } from 'lucide-react'
+import { ArrowLeft, Eye, Clock } from 'lucide-react'
 import Image from 'next/image'
+
+interface AnalyticsEntry {
+    id: string
+    created_at: string
+    referrer: string
+    user_agent: string
+}
 
 type Props = {
     params: Promise<{ slug: string }>
 }
+
+export const dynamic = 'force-dynamic'
 
 async function getCardAndAnalytics(slug: string) {
     const { data: card } = await supabase
@@ -18,13 +27,13 @@ async function getCardAndAnalytics(slug: string) {
 
     if (!card) return { card: null, analytics: [], totalViews: 0 }
 
-    const { data: analytics, count } = await supabase
+    const { data: analytics } = await supabase
         .from('analytics')
-        .select('*', { count: 'exact' })
+        .select('*')
         .eq('card_id', card.id)
         .order('created_at', { ascending: false })
 
-    return { card, analytics, totalViews: count || 0 }
+    return { card, analytics, totalViews: card.views || 0 }
 }
 
 export default async function AnalyticsPage({ params }: Props) {
@@ -77,6 +86,7 @@ export default async function AnalyticsPage({ params }: Props) {
                                 alt={card.title}
                                 fill
                                 className="object-cover"
+                                unoptimized
                             />
                         </div>
                         <CardHeader className="p-4">
@@ -137,7 +147,7 @@ export default async function AnalyticsPage({ params }: Props) {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y">
-                                    {analytics?.slice(0, 50).map((entry: any) => (
+                                    {analytics?.slice(0, 50).map((entry: AnalyticsEntry) => (
                                         <tr key={entry.id} className="hover:bg-muted/50 transition-colors">
                                             <td className="p-4 whitespace-nowrap">
                                                 {new Date(entry.created_at).toLocaleString()}

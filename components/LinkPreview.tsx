@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 
+
 interface LinkPreviewProps {
     title: string;
     description: string;
@@ -15,10 +16,12 @@ export function LinkPreview({ title, description, imageUrl, domain }: LinkPrevie
             <Card className="overflow-hidden border-border bg-card shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <div className="relative aspect-[1.91/1] w-full bg-muted">
                     {imageUrl ? (
-                        <img
+                        <Image
                             src={imageUrl}
                             alt="Preview"
-                            className="object-cover w-full h-full"
+                            fill
+                            className="object-cover"
+                            unoptimized
                         />
                     ) : (
                         <div className="flex items-center justify-center w-full h-full text-muted-foreground bg-muted/50">

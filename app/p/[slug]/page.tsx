@@ -3,13 +3,15 @@ import { supabase } from '@/lib/supabase'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import Image from 'next/image'
 import RedirectComponent from '@/components/RedirectComponent'
 import { headers } from 'next/headers'
+import Image from 'next/image'
 
 type Props = {
     params: Promise<{ slug: string }>
 }
+
+export const dynamic = 'force-dynamic'
 
 async function getCard(slug: string) {
     const { data } = await supabase
@@ -72,6 +74,9 @@ export default async function CardPage({ params }: Props) {
             user_agent: userAgent,
             referrer: referrer,
         })
+
+        // Increment view count
+        await supabase.rpc('increment_views', { card_id: card.id })
     }
 
     if (!card) {
@@ -101,7 +106,7 @@ export default async function CardPage({ params }: Props) {
                         alt={card.title}
                         fill
                         className="object-cover"
-                        priority
+                        unoptimized
                     />
                 </div>
                 <CardHeader>

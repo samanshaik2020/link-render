@@ -10,4 +10,5 @@ interface Card {
     image_width: number;
     image_height: number;
     original_url: string;
+    views: number;
 }

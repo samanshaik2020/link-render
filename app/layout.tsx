@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Outfit, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/Navbar";
+
 import { Footer } from "@/components/Footer";
 
 const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-serif",
   display: "swap",
 });
 
@@ -24,9 +30,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${outfit.variable} font-sans antialiased bg-background text-foreground min-h-screen flex flex-col`}
+        suppressHydrationWarning
+        className={`${outfit.variable} ${playfair.variable} font-sans antialiased bg-background text-foreground min-h-screen flex flex-col`}
       >
-        <Navbar />
+
         <main className="flex-1">
           {children}
         </main>

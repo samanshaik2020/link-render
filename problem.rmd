@@ -1,0 +1,24 @@
+npm run lint:   
+   
+       5:33  warning  'Globe' is defined but never used           @typescript-eslint/no-unused-vars
+   20:30  warning  'count' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  139:74  error    Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+
+✖ 3 problems (1 error, 2 warnings)
+
+
+npm run build:
+⨯ useSearchParams() should be wrapped in a suspense boundary at page "/dashboard". Read more: https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout   
+    at S (C:\Users\saman\OneDrive\Desktop\Project Files\link-render\.next\server\chunks\ssr\OneDrive_Desktop_Project Files_link-render_c4ffd094._.js:38:2111)       
+    at p (C:\Users\saman\OneDrive\Desktop\Project Files\link-render\.next\server\chunks\ssr\OneDrive_Desktop_Project Files_link-render_c4ffd094._.js:40:4848)       
+    at cQ (C:\Users\saman\OneDrive\Desktop\Project Files\link-render\.next\server\chunks\ssr\OneDrive_Desktop_Project Files_link-render_app_dashboard_page_tsx_9535a939._.js:11:2304)
+    at ar (C:\Users\saman\OneDrive\Desktop\Project Files\link-render\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:84366)
+    at aa (C:\Users\saman\OneDrive\Desktop\Project Files\link-render\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:86185)
+    at as (C:\Users\saman\OneDrive\Desktop\Project Files\link-render\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:107952)
+    at ao (C:\Users\saman\OneDrive\Desktop\Project Files\link-render\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:105374)
+    at an (C:\Users\saman\OneDrive\Desktop\Project Files\link-render\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:84718)
+    at aa (C:\Users\saman\OneDrive\Desktop\Project Files\link-render\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:86234)
+    at aa (C:\Users\saman\OneDrive\Desktop\Project Files\link-render\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:104714)
+Error occurred prerendering page "/dashboard". Read more: https://nextjs.org/docs/messages/prerender-error
+Export encountered an error on /dashboard/page: /dashboard, exiting the build.    
+ ⨯ Next.js build worker exited with code: 1 and signal: null
