@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { supabaseAdmin } from '@/lib/supabase-admin'
 import { nanoid } from 'nanoid'
 import probe from 'probe-image-size'
 
@@ -22,7 +23,7 @@ export async function POST(request: Request) {
 
         const slug = nanoid(8) // Generate a short 8-char slug
 
-        const { data, error } = await supabase
+        const { data, error } = await supabaseAdmin
             .from('cards')
             .insert([
                 {
@@ -72,7 +73,7 @@ export async function PUT(request: Request) {
             return NextResponse.json({ error: 'Invalid image URL or image not accessible' }, { status: 400 })
         }
 
-        const { data, error } = await supabase
+        const { data, error } = await supabaseAdmin
             .from('cards')
             .update({
                 title,
