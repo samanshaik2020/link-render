@@ -32,18 +32,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         }
     }
 
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://link-render.vercel.app' // Fallback to a real domain if env is missing, or localhost if strictly local dev is intended but this needs a real URL for WhatsApp
+    const absoluteUrl = `${appUrl}/p/${slug}`
+
+    // Ensure image URL is absolute
+    let imageUrl = card.image_url
+    if (imageUrl.startsWith('/')) {
+        imageUrl = `${appUrl}${imageUrl}`
+    }
+
     return {
         title: card.title,
         description: card.description,
         openGraph: {
             title: card.title,
             description: card.description,
-            url: `/p/${slug}`,
+            url: absoluteUrl,
             type: 'website',
             siteName: 'Link Preview Generator',
             images: [
                 {
-                    url: card.image_url,
+                    url: imageUrl,
                     width: card.image_width,
                     height: card.image_height,
                     alt: card.title,
@@ -54,7 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             card: 'summary_large_image',
             title: card.title,
             description: card.description,
-            images: [card.image_url],
+            images: [imageUrl],
         },
     }
 }
